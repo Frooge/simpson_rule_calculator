@@ -37,7 +37,7 @@ export default function FormComponent() {
         placeholder="1" value={maxValue} onChange={(e) => setMaxValue(e.target.value)} />
 
       <label htmlFor="subintervals" className="text-lg font-semibold text-black">Number of Subintervals:</label>
-      <input type="number" id="subintervals" className="border border-gray-300 rounded-md p-2 text-black"
+      <input type="number" id="subintervals" step={2} className="border border-gray-300 rounded-md p-2 text-black"
         placeholder="0" min={0} value={subintervalsValue} onChange={(e) => setSubintervalsValue(parseInt(e.target.value))} />
 
       <div className="flex justify-between">
