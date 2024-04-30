@@ -2,6 +2,8 @@
 
 import { approximateIntegral } from '@/utils/calculate';
 import React, { useState } from 'react';
+import MathJax from 'react-mathjax2'
+
 
 export default function FormComponent() {
   const [functionValue, setFunctionValue] = useState('');
@@ -9,6 +11,9 @@ export default function FormComponent() {
   const [maxValue, setMaxValue] = useState('');
   const [subintervalsValue, setSubintervalsValue] = useState(0);
   const [answerValue, setAnswerValue] = useState(0.0);
+
+  const tex = `f(x) = \\int_{-\\infty}^\\infty\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,d\\xi`
+
 
   const handleCalculate = () => {
     const val = approximateIntegral(functionValue, minValue, maxValue, subintervalsValue)
@@ -24,19 +29,19 @@ export default function FormComponent() {
 
   return (
     <div className="flex flex-col space-y-2">
-      <label htmlFor="function" className="text-lg font-semibold text-black">Function:</label>
+      <label htmlFor="function" className="text-lg font-semibold text-white">Function:</label>
       <input type="text" id="function" className="border border-gray-300 rounded-md p-2 text-black"
         placeholder="1/(x^5+7)^(1/3)" value={functionValue} onChange={(e) => setFunctionValue(e.target.value)} />
 
-      <label htmlFor="min" className="text-lg font-semibold text-black">Min:</label>
+      <label htmlFor="min" className="text-lg font-semibold text-white">Min:</label>
       <input type="text" id="min" className="border border-gray-300 rounded-md p-2 text-black"
         placeholder="0" value={minValue} onChange={(e) => setMinValue(e.target.value)} />
 
-      <label htmlFor="max" className="text-lg font-semibold text-black">Max:</label>
+      <label htmlFor="max" className="text-lg font-semibold text-white">Max:</label>
       <input type="text" id="max" className="border border-gray-300 rounded-md p-2 text-black"
         placeholder="1" value={maxValue} onChange={(e) => setMaxValue(e.target.value)} />
 
-      <label htmlFor="subintervals" className="text-lg font-semibold text-black">Number of Subintervals:</label>
+      <label htmlFor="subintervals" className="text-lg font-semibold text-white">Number of Subintervals:</label>
       <input type="number" id="subintervals" className="border border-gray-300 rounded-md p-2 text-black"
         placeholder="0" min={0} value={subintervalsValue} onChange={(e) => setSubintervalsValue(parseInt(e.target.value))} />
 
@@ -48,6 +53,18 @@ export default function FormComponent() {
       <div>
         Answer: {answerValue}
       </div>
+
+      <MathJax.Context input='ascii'>
+          <div>
+              This is an inline formula written in AsciiMath: <MathJax.Node inline>{ functionValue }</MathJax.Node>
+          </div>
+      </MathJax.Context>
+
+      <MathJax.Context input='tex'>
+          <div>
+              This is an inline math formula: <MathJax.Node inline>{'n \\leq \\sqrt[4]{\\frac{120}{0.18}}'}</MathJax.Node>
+          </div>
+      </MathJax.Context>
     </div>
   );
 }
