@@ -47,12 +47,12 @@ export default function FormComponent() {
         </div>
       </form>
 
-      <div className="text-dark_green">
+      <MathJax inline={true} className="text-white">
         Answer: {answerValue}
-      </div>
+      </MathJax>
 
           <div>
-              This is an inline formula written in AsciiMath: <MathJax>{ functionValue }</MathJax>
+              This is an inline formula written in AsciiMath: <MathJax inline={true}>{ '$' + functionValue + '$' }</MathJax>
           </div>
 
           <div>
