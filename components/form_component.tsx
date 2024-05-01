@@ -2,8 +2,7 @@
 
 import { approximateIntegral } from '@/utils/calculate';
 import React, { useState } from 'react';
-import MathJax from 'react-mathjax2'
-
+import { MathJax } from 'better-react-mathjax';
 
 export default function FormComponent() {
   const [functionValue, setFunctionValue] = useState('');
@@ -54,17 +53,13 @@ export default function FormComponent() {
         Answer: {answerValue}
       </div>
 
-      <MathJax.Context input='ascii'>
           <div>
-              This is an inline formula written in AsciiMath: <MathJax.Node inline>{ functionValue }</MathJax.Node>
+              This is an inline formula written in AsciiMath: <MathJax>{ functionValue }</MathJax>
           </div>
-      </MathJax.Context>
 
-      <MathJax.Context input='tex'>
           <div>
-              This is an inline math formula: <MathJax.Node inline>{'n \\leq \\sqrt[4]{\\frac{120}{0.18}}'}</MathJax.Node>
+              This is an math formula: <MathJax>{'$n \\leq \\sqrt[4]{\\frac{120}{0.18}}$'}</MathJax>
           </div>
-      </MathJax.Context>
     </div>
   );
 }
