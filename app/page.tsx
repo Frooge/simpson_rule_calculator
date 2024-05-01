@@ -3,8 +3,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-       <FormComponent/>
-    </main>
+      <div className="flex flex-row justify-center w-full max-w-7xl gap-6">
+        <FormComponent/>
+        <div className="flex flex-start basis-full bg-white"> 
+        </div>
+      </div>
   );
 }

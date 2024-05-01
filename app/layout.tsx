@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
+import CustomNavbar from "@/components/custom_navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const pd = Playfair_Display({ subsets: ["latin"], weight: ["400","500","600"]});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={pd.className}>
+        <main className="flex flex-col space-y-6 items-center bg-dark_green min-h-screen">
+          <CustomNavbar />
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
