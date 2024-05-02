@@ -49,7 +49,6 @@ export default function AnswerComponent(
         const solutions = [
             ...[`f(x_0) = f(${a}) = ${assignFunction(functionValue, a)} = ${solveFunction(a)}`],
             ...intervals.map((interval, index) => {
-                console.log('hello')
                 sub = index;
                 const simpson = index%2 == 0 ? '4' : '2';
                 const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index+1)), `${simpson}*${functionValue}`)}`
@@ -62,7 +61,6 @@ export default function AnswerComponent(
     }
 
     const solveFunction = (x: number, f: string = functionValue) => {
-        console.log(f);
         const funcStr = replaceCaretWithDoubleStar(f);
         const func = (x: number) => eval(funcStr);
         return func(x);
@@ -78,23 +76,21 @@ export default function AnswerComponent(
     }
 
   return (
-    <div>
-       
-
+    <div className='max-w-[800px]'>
         <MathJax>
-            <div>
-                Your Input:
-                <div>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} dx$` }</MathJax> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></div> 
-                Solution:
+            <div >
+                <div className='text-2xl text-primary'>Solution:</div>
                 <div>We have <MathJax inline>{`$f(x) = ${functionValue}, a = ${minValue}, b = ${maxValue}, and n = ${subintervalsValue}$`}</MathJax></div>
                 <div>Therefore, <MathJax inline>{`$Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${toStringFraction(new Fraction(parseInt(maxValue)-parseInt(minValue),subintervalsValue))}$`}</MathJax></div>
                 <div>
-                    Divide the interval <MathJax inline>{`$[${minValue}, ${maxValue}]$`}</MathJax> into <MathJax inline>{`$n = ${subintervalsValue}$`}</MathJax>
+                    Divide the interval <MathJax inline>{`$[${minValue}, ${maxValue}]$`}</MathJax> into <MathJax inline>{`$n = ${subintervalsValue}$`} </MathJax>
                     subintervals of the length <MathJax inline>{`$Delta x = ${parseInt(maxValue)-parseInt(minValue)}/${subintervalsValue}$`}</MathJax>
-                    with the following endpoints:
-                    <MathJax inline>{`$a = ${minValue}, ${getIntervals().join(', ')},${maxValue} = b$`}</MathJax> 
+                    with the following endpoints:   
+                    <div className='flex flex-wrap overflow-auto'>
+                        <MathJax inline>{`$a = ${minValue}, ${getIntervals().join(', ')},${maxValue} = b$`}</MathJax> 
+                    </div>
                 </div>
-                <div>Now, just evaluate the function at these endpoints:</div> 
+                <div className='bg-primary p-4 my-4'>Now, just evaluate the function at these endpoints:</div> 
                 <div>
                     {getSolutions().map((solution, index) => (
                         <div key={index + solution}>
