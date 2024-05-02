@@ -9,7 +9,8 @@ export default function FormComponent() {
   const [functionValue, setFunctionValue] = useState('');
   const [minValue, setMinValue] = useState('0');
   const [maxValue, setMaxValue] = useState('1');
-  const [subintervalsValue, setSubintervalsValue] = useState(2);
+  const [epsilon, setEpsilon] = useState('');
+  const [subintervalsValue, setSubintervalsValue] = useState(0);
   const [answerValue, setAnswerValue] = useState(0.0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showError, setError] = useState('');
@@ -33,7 +34,8 @@ export default function FormComponent() {
     setMinValue('0');
     setMaxValue('1');
     setError('');
-    setSubintervalsValue(2);
+    setSubintervalsValue(0);
+    setEpsilon('');
     setShowAnswer(false);
   };
 
@@ -41,18 +43,26 @@ export default function FormComponent() {
     <>
     <div>
       <div className="flex flex-col space-y-2 p-4 bg-white shadow-lg text-sm min-w-[350px] top-[95px] sticky">
-        <label htmlFor="function" className="text-lg font-semibold text-dark_green">Function:</label>
+        <label htmlFor="function" className="text-md font-semibold text-dark_green">Function:</label>
         <input type="text" id="function" className="input-design"
           value={functionValue} onChange={(e) => setFunctionValue(e.target.value)} disabled={showAnswer} />
-        <label htmlFor="min" className="text-lg font-semibold text-dark_green">Min:</label>
+        <label htmlFor="min" className="text-md font-semibold text-dark_green">Min:</label>
         <input type="text" id="min" className="input-design"
            value={minValue} onChange={(e) => setMinValue(e.target.value)} disabled={showAnswer} />
-        <label htmlFor="max" className="text-lg font-semibold text-dark_green">Max:</label>
+        <label htmlFor="max" className="text-md font-semibold text-dark_green">Max:</label>
         <input type="text" id="max" className="input-design"
-           value={maxValue} onChange={(e) => setMaxValue(e.target.value)} disabled={showAnswer} />
-        <label htmlFor="subintervals" className="text-lg font-semibold text-dark_green">Number of Subintervals:</label>
-        <input type="number" id="subintervals" step={2} className="input-design"
-           min={0} value={subintervalsValue} onChange={(e) => setSubintervalsValue(parseInt(e.target.value))} disabled={showAnswer} />
+           value={maxValue} onChange={(e) => setMaxValue(e.target.value)} disabled={showAnswer}  />
+        <div className='flex flex-row gap-2 items-center'>
+          <div className={(epsilon) ? 'hidden': 'w-full'}>
+            <label htmlFor="subintervals" className="text-md font-semibold text-dark_green">Enter Subintervals:</label>
+            <input type="number" id="subintervals" step={2} className="input-design w-full"
+               min={0} value={subintervalsValue}  onChange={(e) => setSubintervalsValue(parseInt(e.target.value))} disabled={showAnswer}/>
+          </div>
+          <div className={(subintervalsValue) ? 'hidden': 'w-full'}>
+            <label htmlFor="epsilon" className="text-md font-semibold text-dark_green">Error Bound (Find n):</label>
+            <input type="text" id="epsilon" className="input-design w-full" value={epsilon} onChange={(e) => setEpsilon(e.target.value)} disabled={showAnswer} />
+          </div>
+        </div>
            
         <div className="flex flex-col justify-between space-y-2">
           {showError && (<div className='text-red-600'>
@@ -68,7 +78,18 @@ export default function FormComponent() {
       
     </div>
     <div className="flex flex-col space-y-6 basis-full border-white border p-4"> 
-    <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></div>
+    <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> 
+    {
+      epsilon && (
+        <span> accurate within <MathJax inline>{ `$${epsilon}$` }</MathJax></span>
+      )
+    }
+     {
+      subintervalsValue !== 0 && (
+        <span> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></span>
+      )
+    }
+  </div>
       {showAnswer &&
       <div>
           <AnswerComponent answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>

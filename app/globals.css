@@ -34,6 +34,6 @@ body {
 
 @layer components {
   .input-design {
-    @apply border-2 border-gray-300 focus:outline-0 outline-2  p-2 text-dark_green disabled:border-secondary 
+    @apply border-2 border-gray-300 focus:bg-green-50 focus:outline-0 outline-2  p-2 text-dark_green disabled:bg-green-50 disabled:border-green-300 
   }
 }
