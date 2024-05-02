@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "fractional": "^1.0.0",
+    "better-react-mathjax": "^2.0.3",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "react-mathjax2": "^0.0.2"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

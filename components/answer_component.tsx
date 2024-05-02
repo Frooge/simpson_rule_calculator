@@ -1,5 +1,5 @@
 import React from 'react'
-import MathJax from 'react-mathjax2'
+import { MathJax } from 'better-react-mathjax';
 import { Fraction } from 'fractional'
 import { replaceCaretWithDoubleStar } from '@/utils/calculate';
 
@@ -47,14 +47,15 @@ export default function AnswerComponent(
 
         let sub = 0;
         const solutions = [
-            ...[`f(x_0) = f(${a}) = ${toStringFraction(new Fraction(solveFunction(a)))} = ${solveFunction(a)}`],
+            ...[`f(x_0) = f(${a}) = ${assignFunction(functionValue, a)} = ${solveFunction(a)}`],
             ...intervals.map((interval, index) => {
+                console.log('hello')
                 sub = index;
                 const simpson = index%2 == 0 ? '4' : '2';
-                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${toStringFraction(new Fraction(solveFunction(a+(x * (index+1)), `${simpson}*${functionValue}`)))} approx ${solveFunction(a+(x * (index+1)), `${simpson}*${functionValue}`)}`
+                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index+1)), `${simpson}*${functionValue}`)}`
                 return solution
             }),
-            ...[`f(x_${sub+1}) = f(${b}) = ${toStringFraction(new Fraction(solveFunction(b)))} = ${solveFunction(b)}`]
+            ...[`f(x_${sub+1}) = f(${b}) = ${assignFunction(functionValue, b)} = ${solveFunction(b)}`]
         ]
 
         return solutions;
@@ -71,39 +72,44 @@ export default function AnswerComponent(
         return `${frac.numerator}/${frac.denominator}`
     }
 
+    const assignFunction = (func: string, x: string | number) => {
+        const replacedFunc = func.replace(/x/g, `(${x.toString()})`);
+        return replacedFunc;
+    }
+
   return (
     <div>
        
 
-        <MathJax.Context input='ascii'>
+        <MathJax>
             <div>
                 Your Input:
-                <div>Approximate the integral <MathJax.Node inline>{ `int_${minValue}^${maxValue} ${functionValue} dx` }</MathJax.Node> with <MathJax.Node inline>{ `n = ${subintervalsValue}` }</MathJax.Node></div> 
+                <div>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} dx$` }</MathJax> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></div> 
                 Solution:
-                <div>We have <MathJax.Node inline>{`f(x) = ${functionValue}, a = ${minValue}, b = ${maxValue}, and n = ${subintervalsValue}`}</MathJax.Node></div>
-                <div>Therefore, <MathJax.Node inline>{`Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${toStringFraction(new Fraction(parseInt(maxValue)-parseInt(minValue)/subintervalsValue))}`}</MathJax.Node></div>
+                <div>We have <MathJax inline>{`$f(x) = ${functionValue}, a = ${minValue}, b = ${maxValue}, and n = ${subintervalsValue}$`}</MathJax></div>
+                <div>Therefore, <MathJax inline>{`$Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${toStringFraction(new Fraction(parseInt(maxValue)-parseInt(minValue),subintervalsValue))}$`}</MathJax></div>
                 <div>
-                    Divide the interval <MathJax.Node inline>{`[${minValue}, ${maxValue}]`}</MathJax.Node> into <MathJax.Node inline>{`n = ${subintervalsValue}`}</MathJax.Node>
-                    subintervals of the length <MathJax.Node inline>{`Delta x = ${parseInt(maxValue)-parseInt(minValue)}/${subintervalsValue}`}</MathJax.Node>
+                    Divide the interval <MathJax inline>{`$[${minValue}, ${maxValue}]$`}</MathJax> into <MathJax inline>{`$n = ${subintervalsValue}$`}</MathJax>
+                    subintervals of the length <MathJax inline>{`$Delta x = ${parseInt(maxValue)-parseInt(minValue)}/${subintervalsValue}$`}</MathJax>
                     with the following endpoints:
-                    <MathJax.Node inline>{`a = ${minValue}, ${getIntervals().join(', ')},${maxValue} = b`}</MathJax.Node> 
+                    <MathJax inline>{`$a = ${minValue}, ${getIntervals().join(', ')},${maxValue} = b$`}</MathJax> 
                 </div>
                 <div>Now, just evaluate the function at these endpoints:</div> 
                 <div>
                     {getSolutions().map((solution) => (
                         <div>
-                        <MathJax.Node inline>{solution}</MathJax.Node>
+                        <MathJax inline>{`$${solution}$`}</MathJax>
                         </div>
                     ))}
                 </div>
 
                 <div>
-                    Finally, just sum up the above values and multiply by <MathJax.Node inline>{`(Delta x) / 3 = ${toStringFraction(new Fraction(parseInt(maxValue)-parseInt(minValue), subintervalsValue).multiply(new Fraction(1,3)))}`}</MathJax.Node>
+                    Finally, just sum up the above values and multiply by <MathJax inline>{`$(Delta x) / 3 = ${toStringFraction(new Fraction(parseInt(maxValue)-parseInt(minValue), subintervalsValue).multiply(new Fraction(1,3)))}$`}</MathJax>
                 </div>
                 
-                <div>We can get the answer of  <MathJax.Node inline>{`int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}`}</MathJax.Node></div>
+                <div>We can get the answer of  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>
             </div>
-        </MathJax.Context>
+        </MathJax>
     </div>
   )
 }
