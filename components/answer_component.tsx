@@ -96,8 +96,8 @@ export default function AnswerComponent(
                 </div>
                 <div>Now, just evaluate the function at these endpoints:</div> 
                 <div>
-                    {getSolutions().map((solution) => (
-                        <div>
+                    {getSolutions().map((solution, index) => (
+                        <div key={index + solution}>
                         <MathJax inline>{`$${solution}$`}</MathJax>
                         </div>
                     ))}
