@@ -3,6 +3,7 @@
 import { approximateIntegral } from '@/utils/calculate';
 import React, { useState } from 'react';
 import AnswerComponent from '@/components/answer_component';
+import ErrorBound from '@/components/error_bound';
 import { MathJax } from 'better-react-mathjax';
 
 export default function FormComponent() {
@@ -79,9 +80,13 @@ export default function FormComponent() {
     </div>
     <div className="flex flex-col space-y-6 basis-full border-white border p-4"> 
     <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> 
+  
     {
       epsilon && (
-        <span> accurate within <MathJax inline>{ `$${epsilon}$` }</MathJax></span>
+        <>
+          <span> accurate within <MathJax inline>{ `$${epsilon}$` }</MathJax></span>
+          <ErrorBound answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} epsilon={epsilon}/>
+        </>
       )
     }
      {

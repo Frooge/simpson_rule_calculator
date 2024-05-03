@@ -75,6 +75,9 @@ export default function AnswerComponent(
         <MathJax>
             <div >
                 <div className='text-2xl text-primary'>Solution:</div>
+                <div className='text-md bg-primary p-4 my-4'>
+            <MathJax>{`The formula for approximating areas using Simpson's rule is defined as follows: $S_n= frac{ Delta x}{3} left(f left(x_0 right)+4 f left(x_1 right)+2 f left(x_2 right)+4 f left(x_3 right)+2 f left(x_4 right)+ ldots+f left(x_n right) right)$`}</MathJax>
+        </div>
                 <div>We have <MathJax inline>{`$f(x) = ${functionValue}, a = ${minValue}, b = ${maxValue}, and n = ${subintervalsValue}$`}</MathJax></div>
                 <div>Therefore, <MathJax inline>{`$Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${new Fraction(parseInt(maxValue)-parseInt(minValue),subintervalsValue).toString()}$`}</MathJax></div>
                 <div>
