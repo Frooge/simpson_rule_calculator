@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "fractional": "^1.0.0",
     "better-react-mathjax": "^2.0.3",
     "next": "14.2.3",
     "react": "^18",
