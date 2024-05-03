@@ -1,29 +1,50 @@
 "use client"
 
 import { approximateIntegral } from '@/utils/calculate';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnswerComponent from '@/components/answer_component';
 import ErrorBound from '@/components/error_bound';
 import { MathJax } from 'better-react-mathjax';
 
-export default function FormComponent() {
+interface ExampleProps {
+  func: string;
+  mn: string;
+  mx: string;
+  n: number; 
+  eps: string;
+}
+
+export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
   const [functionValue, setFunctionValue] = useState('');
-  const [minValue, setMinValue] = useState('0');
-  const [maxValue, setMaxValue] = useState('1');
+  const [minValue, setMinValue] = useState('');
+  const [maxValue, setMaxValue] = useState('');
   const [epsilon, setEpsilon] = useState('');
   const [subintervalsValue, setSubintervalsValue] = useState(0);
   const [answerValue, setAnswerValue] = useState(0.0);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showErrorBound, setShowErrorBound] = useState(false); 
   const [showError, setError] = useState('');
+
+  useEffect(() => {
+    setFunctionValue(func);
+    setMinValue(mn);
+    setMaxValue(mx);
+    setEpsilon(eps);
+    setSubintervalsValue(n);
+  },[func,mn,mx,n,eps]);
 
   const tex = `f(x) = \\int_{-\\infty}^\\infty\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,d\\xi`;
 
 
   const handleCalculate = () => {
-    if(functionValue && minValue && maxValue && subintervalsValue){
-      const val = approximateIntegral(functionValue, minValue, maxValue, subintervalsValue)
-      setAnswerValue(val);
-      setShowAnswer(true);
+    if(functionValue && minValue && maxValue){
+      if(subintervalsValue){
+        const val = approximateIntegral(functionValue, minValue, maxValue, subintervalsValue)
+        setAnswerValue(val);
+        setShowAnswer(true);
+      }else if(epsilon){
+        setShowErrorBound(true);
+      }
       setError('');
     }else{
       setError('Please provide values before we can proceed calculating.')
@@ -34,10 +55,11 @@ export default function FormComponent() {
     setFunctionValue('');
     setMinValue('0');
     setMaxValue('1');
-    setError('');
     setSubintervalsValue(0);
     setEpsilon('');
+    setError('');
     setShowAnswer(false);
+    setShowErrorBound(false);
   };
 
   return (
@@ -78,11 +100,11 @@ export default function FormComponent() {
       </div>
       
     </div>
-    <div className="flex flex-col space-y-6 basis-full border-white border p-4"> 
+    <div className="flex flex-col space-y-6 basis-full min-w-[900px] border-white border p-4"> 
     <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> 
   
     {
-      epsilon && (
+      epsilon && showErrorBound && (
         <>
           <span> accurate within <MathJax inline>{ `$${epsilon}$` }</MathJax></span>
           <ErrorBound answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} epsilon={epsilon}/>
