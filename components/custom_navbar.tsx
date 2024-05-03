@@ -13,9 +13,9 @@ export default function CustomNavbar () {
   ]
 
   return (
-    <nav className=" flex flex-row justify-between items-center w-full p-4 bg-secondary backdrop-blur-sm bg-opacity-50  top-0 sticky  shadow-sm cursor-pointer">
+    <nav className=" flex flex-row justify-between items-center w-full p-4 bg-secondary backdrop-blur-sm bg-opacity-50  top-0 sticky  shadow-sm cursor-pointer z-10">
         <h1 className="text-md text-white">
-          GROUP 2
+          GROUP 2 - Simpson&apos;s Caculator
         </h1>
         <ul className="flex flex-row space-x-8 justify-between items-center">
           {

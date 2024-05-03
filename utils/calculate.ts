@@ -2,7 +2,6 @@ export function approximateIntegral(funcStr: string, aStr: string, bStr: string,
 
     // Define the function from the string
     const func = replaceCaretWithDoubleStar(funcStr);
-    console.log(funcStr, func)
     const f = (x: number) => eval(func);
     const a = parseInt(aStr);
     const b = parseInt(bStr);
@@ -32,7 +31,7 @@ export function approximateIntegral(funcStr: string, aStr: string, bStr: string,
     return integral;
 }
 
-function replaceCaretWithDoubleStar(expression: string): string {
+export function replaceCaretWithDoubleStar(expression: string): string {
     return expression.replace(/\^/g, '**');
 }
 
