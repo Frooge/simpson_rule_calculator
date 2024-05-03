@@ -68,22 +68,22 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
       <div className="flex flex-col space-y-2 p-4 bg-white shadow-lg text-sm min-w-[350px] top-[95px] sticky">
         <label htmlFor="function" className="text-md font-semibold text-dark_green">Function:</label>
         <input type="text" id="function" className="input-design"
-          value={functionValue} onChange={(e) => setFunctionValue(e.target.value)} disabled={showAnswer} />
+          value={functionValue} onChange={(e) => setFunctionValue(e.target.value)} disabled={showAnswer || showErrorBound} />
         <label htmlFor="min" className="text-md font-semibold text-dark_green">Min:</label>
         <input type="text" id="min" className="input-design"
-           value={minValue} onChange={(e) => setMinValue(e.target.value)} disabled={showAnswer} />
+           value={minValue} onChange={(e) => setMinValue(e.target.value)} disabled={showAnswer || showErrorBound} />
         <label htmlFor="max" className="text-md font-semibold text-dark_green">Max:</label>
         <input type="text" id="max" className="input-design"
-           value={maxValue} onChange={(e) => setMaxValue(e.target.value)} disabled={showAnswer}  />
+           value={maxValue} onChange={(e) => setMaxValue(e.target.value)} disabled={showAnswer || showErrorBound}  />
         <div className='flex flex-row gap-2 items-center'>
           <div className={(epsilon) ? 'hidden': 'w-full'}>
             <label htmlFor="subintervals" className="text-md font-semibold text-dark_green">Enter Subintervals:</label>
             <input type="number" id="subintervals" step={2} className="input-design w-full"
-               min={0} value={subintervalsValue}  onChange={(e) => setSubintervalsValue(parseInt(e.target.value))} disabled={showAnswer}/>
+               min={0} value={subintervalsValue}  onChange={(e) => setSubintervalsValue(parseInt(e.target.value))} disabled={showAnswer || showErrorBound}/>
           </div>
           <div className={(subintervalsValue) ? 'hidden': 'w-full'}>
             <label htmlFor="epsilon" className="text-md font-semibold text-dark_green">Error Bound (Find n):</label>
-            <input type="text" id="epsilon" className="input-design w-full" value={epsilon} onChange={(e) => setEpsilon(e.target.value)} disabled={showAnswer} />
+            <input type="text" id="epsilon" className="input-design w-full" value={epsilon} onChange={(e) => setEpsilon(e.target.value)} disabled={showAnswer || showErrorBound} />
           </div>
         </div>
            
