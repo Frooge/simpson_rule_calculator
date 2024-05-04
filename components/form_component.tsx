@@ -31,6 +31,8 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
     setMaxValue(mx);
     setEpsilon(eps);
     setSubintervalsValue(n);
+    setShowAnswer(false);
+    setShowErrorBound(false);
   },[func,mn,mx,n,eps]);
 
   const tex = `f(x) = \\int_{-\\infty}^\\infty\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,d\\xi`;

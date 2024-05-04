@@ -1,6 +1,6 @@
 import React from 'react'
 import { MathJax } from 'better-react-mathjax';
-import { derivative, parse, ceil } from 'mathjs';
+import { derivative, parse, ceil, abs } from 'mathjs';
 import AnswerComponent from '@/components/answer_component';
 
 interface props {
@@ -34,7 +34,7 @@ export default function ErrorBound ({
         let M: number = 0;
         let fourth_deriv = derivative(derivative(derivative(derivative(functionValue,'x'),"x"),"x"),"x").toString();
         const xValues = [a,b]
-        let value = xValues.map(x => parse(fourth_deriv).evaluate({x:x}))
+        let value = xValues.map(x => abs(parse(fourth_deriv).evaluate({x:x})))
         return M = Math.max(...(value).filter(x => x !== Infinity));
     }
 
