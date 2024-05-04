@@ -1,7 +1,7 @@
 import React from 'react'
 import { MathJax } from 'better-react-mathjax';
 import Fraction from '@/utils/fraction';
-import { replaceCaretWithDoubleStar } from '@/utils/calculate';
+import { parse } from 'mathjs';
 
 interface props {
     answerValue: number,
@@ -60,9 +60,8 @@ export default function AnswerComponent(
     }
 
     const solveFunction = (x: number, f: string = functionValue) => {
-        const funcStr = replaceCaretWithDoubleStar(f);
-        const func = (x: number) => eval(funcStr);
-        return func(x);
+        const evalue = parse(f).evaluate({x:x})
+        return evalue;
     }
 
     const assignFunction = (func: string, x: string | number) => {

@@ -1,8 +1,11 @@
+import { parse } from 'mathjs';
+
 export function approximateIntegral(funcStr: string, aStr: string, bStr: string, n: number) {
 
     // Define the function from the string
-    const func = replaceCaretWithDoubleStar(funcStr);
-    const f = (x: number) => eval(func);
+    // const func = replaceCaretWithDoubleStar(funcStr);
+    const func = parse(funcStr)
+    const f = (x: number) => func.evaluate({x:x});
     const a = parseInt(aStr);
     const b = parseInt(bStr);
 
