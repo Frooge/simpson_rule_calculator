@@ -1,7 +1,7 @@
 import React from 'react'
 import { MathJax } from 'better-react-mathjax';
 import Fraction from '@/utils/fraction';
-import { replaceCaretWithDoubleStar } from '@/utils/calculate';
+import { parse } from 'mathjs';
 
 interface props {
     answerValue: number,
@@ -43,14 +43,16 @@ export default function AnswerComponent(
         const x = (b-a)/subintervalsValue;
         const intervals = getIntervals();
 
+        console.log(x, 'aaaaaaa');
+
         let sub = 0;
         const solutions = [
             ...[`f(x_0) = f(${a}) = ${assignFunction(functionValue, a)} = ${solveFunction(a)}`],
             ...intervals.map((interval, index) => {
                 index = index+1;
                 sub = index;
-                const simpson = index%2 == 0 ? '4' : '2';
-                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index+1)), `${simpson}*${functionValue}`)}`
+                const simpson = index%2 !== 0 ? '4' : '2';
+                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index)), `${simpson}*${functionValue}`)}`
                 return solution
             }),
             ...[`f(x_${sub+1}) = f(${b}) = ${assignFunction(functionValue, b)} = ${solveFunction(b)}`]
@@ -60,9 +62,9 @@ export default function AnswerComponent(
     }
 
     const solveFunction = (x: number, f: string = functionValue) => {
-        const funcStr = replaceCaretWithDoubleStar(f);
-        const func = (x: number) => eval(funcStr);
-        return func(x);
+        console.log(x, f);
+        const evalue = parse(f).evaluate({x:x})
+        return evalue;
     }
 
     const assignFunction = (func: string, x: string | number) => {
@@ -75,6 +77,9 @@ export default function AnswerComponent(
         <MathJax>
             <div >
                 <div className='text-2xl text-primary'>Solution:</div>
+                <div className='text-md bg-primary p-4 my-4'>
+            <MathJax>{`The formula for approximating areas using Simpson's rule is defined as follows: $S_n= frac{ Delta x}{3} left(f left(x_0 right)+4 f left(x_1 right)+2 f left(x_2 right)+4 f left(x_3 right)+2 f left(x_4 right)+ ldots+f left(x_n right) right)$`}</MathJax>
+        </div>
                 <div>We have <MathJax inline>{`$f(x) = ${functionValue}, a = ${minValue}, b = ${maxValue}, and n = ${subintervalsValue}$`}</MathJax></div>
                 <div>Therefore, <MathJax inline>{`$Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${new Fraction(parseInt(maxValue)-parseInt(minValue),subintervalsValue).toString()}$`}</MathJax></div>
                 <div>
