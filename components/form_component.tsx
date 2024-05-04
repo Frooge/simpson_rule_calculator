@@ -42,8 +42,13 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
     if(functionValue && minValue && maxValue){
       if(subintervalsValue){
         const val = approximateIntegral(functionValue, minValue, maxValue, subintervalsValue)
-        setAnswerValue(val);
-        setShowAnswer(true);
+        if(typeof val === 'string') {
+          alert(val);
+        } else {
+          setAnswerValue(val);
+          setShowAnswer(true);
+        }
+        
       }else if(epsilon){
         setShowErrorBound(true);
       }
