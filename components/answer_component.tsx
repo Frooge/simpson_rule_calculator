@@ -43,14 +43,16 @@ export default function AnswerComponent(
         const x = (b-a)/subintervalsValue;
         const intervals = getIntervals();
 
+        console.log(x, 'aaaaaaa');
+
         let sub = 0;
         const solutions = [
             ...[`f(x_0) = f(${a}) = ${assignFunction(functionValue, a)} = ${solveFunction(a)}`],
             ...intervals.map((interval, index) => {
                 index = index+1;
                 sub = index;
-                const simpson = index%2 == 0 ? '4' : '2';
-                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index+1)), `${simpson}*${functionValue}`)}`
+                const simpson = index%2 !== 0 ? '4' : '2';
+                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index)), `${simpson}*${functionValue}`)}`
                 return solution
             }),
             ...[`f(x_${sub+1}) = f(${b}) = ${assignFunction(functionValue, b)} = ${solveFunction(b)}`]
@@ -60,6 +62,7 @@ export default function AnswerComponent(
     }
 
     const solveFunction = (x: number, f: string = functionValue) => {
+        console.log(x, f);
         const evalue = parse(f).evaluate({x:x})
         return evalue;
     }
