@@ -8,16 +8,16 @@ import { MathJax } from 'better-react-mathjax';
 
 interface ExampleProps {
   func: string;
-  mn: string;
-  mx: string;
+  mn: number;
+  mx: number;
   n: number; 
   eps: string;
 }
 
 export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
   const [functionValue, setFunctionValue] = useState('');
-  const [minValue, setMinValue] = useState('');
-  const [maxValue, setMaxValue] = useState('');
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(0);
   const [epsilon, setEpsilon] = useState('');
   const [subintervalsValue, setSubintervalsValue] = useState(0);
   const [answerValue, setAnswerValue] = useState(0.0);
@@ -39,7 +39,7 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
 
 
   const handleCalculate = () => {
-    if(functionValue && minValue && maxValue){
+    if(functionValue){
       if(subintervalsValue){
         const val = approximateIntegral(functionValue, minValue, maxValue, subintervalsValue)
         if(typeof val === 'string') {
@@ -60,8 +60,8 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
 
   const handleClearAll = () => {
     setFunctionValue('');
-    setMinValue('0');
-    setMaxValue('1');
+    setMinValue(0);
+    setMaxValue(1);
     setSubintervalsValue(0);
     setEpsilon('');
     setError('');
@@ -77,11 +77,11 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
         <input type="text" id="function" className="input-design"
           value={functionValue} onChange={(e) => setFunctionValue(e.target.value)} disabled={showAnswer || showErrorBound} />
         <label htmlFor="min" className="text-md font-semibold text-dark_green">Min:</label>
-        <input type="text" id="min" className="input-design"
-           value={minValue} onChange={(e) => setMinValue(e.target.value)} disabled={showAnswer || showErrorBound} />
+        <input type="number" id="min" className="input-design"
+           value={minValue} onChange={(e) => setMinValue(parseFloat(e.target.value))} disabled={showAnswer || showErrorBound} />
         <label htmlFor="max" className="text-md font-semibold text-dark_green">Max:</label>
-        <input type="text" id="max" className="input-design"
-           value={maxValue} onChange={(e) => setMaxValue(e.target.value)} disabled={showAnswer || showErrorBound}  />
+        <input type="number" id="max" className="input-design"
+           value={maxValue} onChange={(e) => setMaxValue(parseFloat(e.target.value))} disabled={showAnswer || showErrorBound}  />
         <div className='flex flex-row gap-2 items-center'>
           <div className={(epsilon) ? 'hidden': 'w-full'}>
             <label htmlFor="subintervals" className="text-md font-semibold text-dark_green">Enter Subintervals:</label>

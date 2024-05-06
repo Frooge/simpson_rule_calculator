@@ -5,8 +5,8 @@ import { parse } from 'mathjs';
 
 interface props {
     answerValue: number,
-    minValue: string,
-    maxValue: string,
+    minValue: number,
+    maxValue: number,
     functionValue: string,
     subintervalsValue: number,
 }
@@ -21,15 +21,15 @@ export default function AnswerComponent(
     }: props
 ) {
     const getIntervals = (): string[] => {
-        const a = parseInt(minValue);
-        const b = parseInt(maxValue);
+        const a = minValue;
+        const b = maxValue;
         const x = new Fraction((b-a), subintervalsValue);
 
         let intervals: string[] = [];
         
         let start = new Fraction(a).add(x);
 
-        while(start.toString() !== maxValue) {
+        while(parseFloat(start.toString()) !== maxValue) {
             intervals.push(start.toString());
             start = start.add(x);
         }
@@ -38,8 +38,8 @@ export default function AnswerComponent(
     }
 
     const getSolutions = (): string[] => {
-        const a = parseInt(minValue);
-        const b = parseInt(maxValue);
+        const a = minValue;
+        const b = maxValue;
         const x = (b-a)/subintervalsValue;
         const intervals = getIntervals();
 
@@ -81,10 +81,10 @@ export default function AnswerComponent(
             <MathJax>{`The formula for approximating areas using Simpson's rule is defined as follows: $S_n= frac{ Delta x}{3} left(f left(x_0 right)+4 f left(x_1 right)+2 f left(x_2 right)+4 f left(x_3 right)+2 f left(x_4 right)+ ldots+f left(x_n right) right)$`}</MathJax>
         </div>
                 <div>We have <MathJax inline>{`$f(x) = ${functionValue}, a = ${minValue}, b = ${maxValue}, and n = ${subintervalsValue}$`}</MathJax></div>
-                <div>Therefore, <MathJax inline>{`$Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${new Fraction(parseInt(maxValue)-parseInt(minValue),subintervalsValue).toString()}$`}</MathJax></div>
+                <div>Therefore, <MathJax inline>{`$Delta x = (${maxValue} - ${minValue})/${subintervalsValue} = ${new Fraction(maxValue-minValue,subintervalsValue).toString()}$`}</MathJax></div>
                 <div>
                     Divide the interval <MathJax inline>{`$[${minValue}, ${maxValue}]$`}</MathJax> into <MathJax inline>{`$n = ${subintervalsValue}$`} </MathJax>
-                    subintervals of the length <MathJax inline>{`$Delta x = ${parseInt(maxValue)-parseInt(minValue)}/${subintervalsValue}$`}</MathJax>
+                    subintervals of the length <MathJax inline>{`$Delta x = ${maxValue-minValue}/${subintervalsValue}$`}</MathJax>
                     with the following endpoints:   
                     <div className='flex flex-wrap overflow-auto'>
                         <MathJax inline>{`$a = ${minValue}, ${getIntervals().join(', ')},${maxValue} = b$`}</MathJax> 
@@ -100,7 +100,7 @@ export default function AnswerComponent(
                 </div>
 
                 <div>
-                    Finally, just sum up the above values and multiply by <MathJax inline>{`$(Delta x) / 3 = ${new Fraction(parseInt(maxValue)-parseInt(minValue), subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
+                    Finally, just sum up the above values and multiply by <MathJax inline>{`$(Delta x) / 3 = ${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
                 
                 <div>We can get the answer of  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>

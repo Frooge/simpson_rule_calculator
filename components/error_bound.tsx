@@ -5,8 +5,8 @@ import AnswerComponent from '@/components/answer_component';
 
 interface props {
     answerValue: number,
-    minValue: string,
-    maxValue: string,
+    minValue: number,
+    maxValue: number,
     functionValue: string,
     epsilon: string,
 }
@@ -14,8 +14,8 @@ interface props {
 export default function ErrorBound ({
     minValue, maxValue, functionValue, epsilon} : props
 ) {
-    const a = parseInt(minValue);
-    const b = parseInt(maxValue);
+    const a = minValue;
+    const b = maxValue;
     const eps = parseFloat(epsilon);
 
     const findDerivatives  = () => {

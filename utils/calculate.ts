@@ -1,14 +1,12 @@
 import { parse } from 'mathjs';
 
-export function approximateIntegral(funcStr: string, aStr: string, bStr: string, n: number) {
+export function approximateIntegral(funcStr: string, a: number, b: number, n: number) {
 
     try {
         // Define the function from the string
         const func = parse(funcStr)
         const f = (x: number) => func.evaluate({x:x});
 
-        const a = parseInt(aStr);
-        const b = parseInt(bStr);
 
         if (n % 2 !== 0) {
             throw new Error("Number of subintervals must be even.");
