@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import AnswerComponent from '@/components/answer_component';
 import ErrorBound from '@/components/error_bound';
 import { MathJax } from 'better-react-mathjax';
+import ChartComponent from '@/components/chart_component';
 
 interface ExampleProps {
   func: string;
@@ -108,7 +109,6 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
           </MathJax>
       )}
       </div>
-      
     </div>
     <div className="flex flex-col space-y-6 basis-full min-w-[900px] border-white border p-4"> 
     <MathJax className='self-center'>
@@ -131,6 +131,7 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
       {showAnswer &&
       <div>
           <AnswerComponent answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
+          <ChartComponent minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
       </div>
       }
     </div>
