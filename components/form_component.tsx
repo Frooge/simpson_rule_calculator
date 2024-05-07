@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import AnswerComponent from '@/components/answer_component';
 import ErrorBound from '@/components/error_bound';
 import { MathJax } from 'better-react-mathjax';
+import ChartComponent from '@/components/chart_component';
 
 interface ExampleProps {
   func: string;
@@ -105,7 +106,6 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
           <div className=' p-4 bg-dark_green transition-all ease-in-out'>Answer:  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>
       )}
       </div>
-      
     </div>
     <div className="flex flex-col space-y-6 basis-full min-w-[900px] border-white border p-4"> 
     <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> 
@@ -127,6 +127,7 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
       {showAnswer &&
       <div>
           <AnswerComponent answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
+          <ChartComponent minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
       </div>
       }
     </div>
