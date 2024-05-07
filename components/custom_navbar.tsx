@@ -8,8 +8,8 @@ export default function CustomNavbar () {
   const navLinks = [
     {name: 'Calculator', href:'/'},
     {name: 'Guides', href:'/guides'},
-    {name: 'Solutions', href:'/solutions'},
     {name: 'Members', href:'/members'},
+    // {name: 'Solutions', href:'/solutions'},
   ]
 
   return (
@@ -26,7 +26,7 @@ export default function CustomNavbar () {
           ) 
           })}
         </ul>
-      <div className="px-4 py-2  bg-dark_green text-white">Explore</div>
+      <div></div>
     </nav>
   );
 }

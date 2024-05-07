@@ -120,7 +120,7 @@ export default function AnswerComponent(
                 <div>
                     Finally, just sum up the above values and multiply by <MathJax inline>{`$(Delta x) / 3 = ${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
-                <div>
+                <div className='overflow-auto'>
                     <MathJax inline>{`$=(${allCalculations().join('+')})*${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
                 
