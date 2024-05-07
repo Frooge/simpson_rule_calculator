@@ -17,7 +17,7 @@ export default function Guide() {
               height={500}
               alt="Picture of Thomas Simpson"
               />
-                <div className="container mb-6 mx-auto w-5/6 text-justify text-2xl font-serif"><b className="text-primary">Thomas Simpson</b> initially published <b className="text-primary">Simpson&apos;s rule</b> for approximating definite integrals in 1743. It was not Thomas Simpson who made the initial discovery, despite it being named after him. An early version of this rule was discovered in 1639 by Bonaventura Cavalieri. James Gregory published this modification and various other numerical techniques for approximating definite integrals in 1668.</div>
+                <div className="container mb-6 mx-auto px-9 w-5/6 text-justify text-2xl font-serif"><b className="text-primary">Thomas Simpson</b> initially published <b className="text-primary">Simpson&apos;s rule</b> for approximating definite integrals in 1743. It was not Thomas Simpson who made the initial discovery, despite it being named after him. An early version of this rule was discovered in 1639 by Bonaventura Cavalieri. James Gregory published this modification and various other numerical techniques for approximating definite integrals in 1668.</div>
             </div>
               <div className="columns-2">
               <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Definition.</div>
@@ -54,6 +54,11 @@ export default function Guide() {
               </div>
             </ul>
             <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Conclusion.</div>
+            <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">Simpson&apos;s Rule is a numerical integration method used to approximate the definite integral of a function. What makes it unique compared to other numerical integration techniques like the trapezoidal rule is its use of quadratic approximations. Instead of approximating the function with straight lines (as in the trapezoidal rule), Simpson&apos;s Rule uses quadratic polynomials to approximate the curve of the function between each pair of points.</div>
+            <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">This quadratic approximation allows Simpson&apos;s Rule to provide a more accurate estimation of the integral, especially for functions that are well-behaved and smooth. It typically converges to the exact value of the integral faster than the trapezoidal rule for functions that are sufficiently smooth.</div>
+            <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">Another unique aspect of Simpson&apos;s Rule is its simplicity in implementation. It involves dividing the interval of integration into subintervals and applying a formula that combines the function values at the endpoints and midpoint of each subinterval to compute the approximation. This simplicity makes it a popular choice for numerical integration in various fields, including mathematics, physics, engineering, and computer science.</div>
+            <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Learning Outcomes.</div>
+            <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">We created this website in order to fully understand Simpson&apos;s Rule and to create a calculator that shows the process of the this numerical integration.</div>
             <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Other Sources.</div>
             <div className="grid grid-flow-row grid-cols-2 gap-y-8">
               <iframe width="500" height="315" src="https://www.youtube.com/embed/IGC_tEOsdQ8?si=AGzRZG8xiyVpLq5q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
