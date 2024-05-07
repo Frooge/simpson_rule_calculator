@@ -44,6 +44,10 @@ export default function ErrorBound ({
         return (N !== Infinity) ? N : NaN;
     }
 
+    const ceilOddNumbers = (n: number) => {
+        return n % 2 === 0 ? n : n+1;
+    }
+
     return (
         <div className='text-white text-[18px] flex flex-col space-y-6'>
         <MathJax inline>{`Here $a = ${a}, b=${b}, f(x) = ${functionValue}$`}</MathJax>
@@ -58,7 +62,7 @@ export default function ErrorBound ({
                 ))}
         </div>
         <MathJax inline>{`Therefore we set $M$ = $${findMaxValue()}$, since $|f^{(4)}(x)| leq$ $${findMaxValue()}$ for $${a}$ $leq x leq$ ${b}`}</MathJax>
-        <MathJax inline>{`Solve for $n$,  $n geq  4sqrt{frac{${findMaxValue()}(${b}-${a})^5}{180(${eps})}} =  ${findN(findMaxValue())} = ${ceil(findN(findMaxValue()))}  $ iterations `}</MathJax>
+        <MathJax inline>{`Solve for $n$,  $n geq  4sqrt{frac{${findMaxValue()}(${b}-${a})^5}{180(${eps})}} =  ${findN(findMaxValue())} = ${ceilOddNumbers(ceil(findN(findMaxValue())))}  $ iterations `}</MathJax>
 
         </div>
     )
