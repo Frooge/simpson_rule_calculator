@@ -33,6 +33,7 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
     setSubintervalsValue(n);
     setShowAnswer(false);
     setShowErrorBound(false);
+    console.log(epsilon, showErrorBound);
   },[func,mn,mx,n,eps]);
 
   const tex = `f(x) = \\int_{-\\infty}^\\infty\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,d\\xi`;
@@ -102,28 +103,31 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
           <button className="border-2 border-secondary px-4 py-2 text-secondary hover:text-white hover:bg-secondary w-full" onClick={handleClearAll}>Clear All</button>
         </div>
         {showAnswer && (
-          <div className=' p-4 bg-dark_green transition-all ease-in-out'>Answer:  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>
+          <MathJax>
+            <div className=' p-4 bg-dark_green transition-all ease-in-out'>Answer:  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>
+          </MathJax>
       )}
       </div>
       
     </div>
     <div className="flex flex-col space-y-6 basis-full min-w-[900px] border-white border p-4"> 
-    <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> 
-  
-    {
-      epsilon && showErrorBound && (
-        <>
-          <span> accurate within <MathJax inline>{ `$${epsilon}$` }</MathJax></span>
-          <ErrorBound answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} epsilon={epsilon}/>
-        </>
-      )
-    }
-     {
-      subintervalsValue !== 0 && (
-        <span> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></span>
-      )
-    }
-  </div>
+    <MathJax className='self-center'>
+      <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} \\  dx$` }</MathJax> 
+      {
+        epsilon && showErrorBound && (
+          <span>
+            <span> accurate within <MathJax inline>{ `$${epsilon}$` }</MathJax></span>
+            <ErrorBound answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} epsilon={epsilon}/>
+          </span>
+        )
+      }
+      {
+        subintervalsValue !== 0 && (
+            <span> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></span>
+        )
+      }
+    </div>
+    </MathJax>
       {showAnswer &&
       <div>
           <AnswerComponent answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>

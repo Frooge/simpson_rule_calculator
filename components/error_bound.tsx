@@ -35,7 +35,7 @@ export default function ErrorBound ({
         let fourth_deriv = derivative(derivative(derivative(derivative(functionValue,'x'),"x"),"x"),"x").toString();
         const xValues = [a,b]
         let value = xValues.map(x => abs(parse(fourth_deriv).evaluate({x:x})))
-        return M = Math.max(...(value).filter(x => x !== Infinity));
+        return M = Math.max(...(value).filter(x => typeof x === 'number' && isFinite(x)));
     }
 
     const findN = (M: number) => {
