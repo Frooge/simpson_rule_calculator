@@ -29,7 +29,7 @@ export default function AnswerComponent(
         
         let start = new Fraction(a).add(x);
 
-        while(parseFloat(start.toString()) !== maxValue) {
+        while(start.numerator/start.denominator !== maxValue) {
             intervals.push(start.toString());
             start = start.add(x);
         }
@@ -42,8 +42,6 @@ export default function AnswerComponent(
         const b = maxValue;
         const x = (b-a)/subintervalsValue;
         const intervals = getIntervals();
-
-        console.log(x, 'aaaaaaa');
 
         let sub = 0;
         const solutions = [
@@ -62,7 +60,6 @@ export default function AnswerComponent(
     }
 
     const solveFunction = (x: number, f: string = functionValue) => {
-        console.log(x, f);
         const evalue = parse(f).evaluate({x:x})
         return evalue;
     }
