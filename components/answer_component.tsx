@@ -42,18 +42,20 @@ export default function AnswerComponent(
         const b = maxValue;
         const x = (b-a)/subintervalsValue;
         const intervals = getIntervals();
+        const rule = ['4', '2'];
+        const calculations = allCalculations();
 
         let sub = 0;
         const solutions = [
-            ...[`f(x_0) = f(${a}) = ${assignFunction(functionValue, a)} = ${solveFunction(a)}`],
+            ...[`f(x_0) = f(${a}) = ${assignFunction(functionValue, a)} = ${calculations[0]}`],
             ...intervals.map((interval, index) => {
+                const r = rule[index%2];
                 index = index+1;
                 sub = index;
-                const simpson = index%2 !== 0 ? '4' : '2';
-                const solution = `${simpson}f(x_${index}) = ${simpson}f(${interval}) = ${simpson} * ${assignFunction(functionValue, interval)} approx ${solveFunction(a+(x * (index)), `${simpson}*${functionValue}`)}`
+                const solution = `${r}f(x_${index}) = ${r}f(${interval}) = ${r} * ${assignFunction(functionValue, interval)} approx ${calculations[index]}`
                 return solution
             }),
-            ...[`f(x_${sub+1}) = f(${b}) = ${assignFunction(functionValue, b)} = ${solveFunction(b)}`]
+            ...[`f(x_${sub+1}) = f(${b}) = ${assignFunction(functionValue, b)} = ${calculations[calculations.length-1]}`]
         ]
 
         return solutions;
@@ -67,6 +69,25 @@ export default function AnswerComponent(
     const assignFunction = (func: string, x: string | number) => {
         const replacedFunc = func.replace(/x/g, `(${x.toString()})`);
         return replacedFunc;
+    }
+
+    const allCalculations = (): string[] => {
+        const a = minValue;
+        const b = maxValue;
+        const x = (b-a)/subintervalsValue;
+        const intervals = getIntervals();
+        const rule = ['4', '2'];
+
+        const calculations = [
+            ...[solveFunction(a)],
+            ...intervals.map((interval, index: number) => {
+                const r = rule[index%2];
+                index = index+1;
+                return solveFunction(a+(x * (index)), `${r}*${functionValue}`)
+            }),
+            ...[solveFunction(b)]
+        ]
+        return calculations;
     }
 
   return (
@@ -98,6 +119,9 @@ export default function AnswerComponent(
 
                 <div>
                     Finally, just sum up the above values and multiply by <MathJax inline>{`$(Delta x) / 3 = ${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
+                </div>
+                <div>
+                    <MathJax inline>{`$=(${allCalculations().join('+')})*${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
                 
                 <div>We can get the answer of  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>
