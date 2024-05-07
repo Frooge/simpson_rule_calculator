@@ -124,7 +124,7 @@ export default function AnswerComponent(
                     <MathJax inline>{`$=(${allCalculations().join('+')})*${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
                 
-                <div>We can get the answer of  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} dx approx ${answerValue}$`}</MathJax></div>
+                <div>We can get the answer of  <MathJax inline>{`$int_${minValue}^${maxValue} ${functionValue} \\ dx approx ${answerValue}$`}</MathJax></div>
             </div>
         </MathJax>
     </div>
