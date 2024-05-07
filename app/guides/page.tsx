@@ -54,6 +54,13 @@ export default function Guide() {
               </div>
             </ul>
             <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Conclusion.</div>
+            <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Other Sources.</div>
+            <div className="grid grid-flow-row grid-cols-2 gap-y-8">
+              <iframe width="500" height="315" src="https://www.youtube.com/embed/IGC_tEOsdQ8?si=AGzRZG8xiyVpLq5q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="500" height="315" src="https://www.youtube.com/embed/JjUn5waLJ-o?si=qcZ0k43DpfMuoFB0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="500" height="315" src="https://www.youtube.com/embed/DdNAcv_rezc?si=bajm0tUiP8QejNP3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="500" height="315" src="https://www.youtube.com/embed/7MoRzPObRf0?si=mIS9xsa1ttuboyRr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
       </div>
