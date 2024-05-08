@@ -43,19 +43,19 @@ export default function Guide() {
             <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Scope and Limitations.</div>
             <ul className="list-disc container my-6 mx-auto w-5/6 text-justify text-2xl font-serif flex-col space-y-6">
               <li><span className="font-bold text-primary">Subintervals must be even.</span> We divide the area into even number of segments. The reason for this is because we integrate two subsections at a time (remember that we are using parabolas to approximate the area)</li>
-              <li><span className="font-bold text-primary">Inapplicable to Improper Integrals.</span> Integrals with infinite interval, the given function approaches zero as x approaches infinity.</li>
-              <li className="text-primary">Integral with Infinite Interval. The function approaches zero as x approaches infinity</li>
-              <div className="flex flex-row items-center justify-center">
+              <li><span className="font-bold text-primary">Inapplicable to Improper Integrals.</span></li>
+              <li className="">Integral with Infinite Interval. The function approaches zero as x approaches infinity</li>
+              <div className="flex flex-row items-center justify-center text-primary">
                 <MathJax  inline>{"$int_{1}^{infty} frac{1}{x^2} , dx$"}</MathJax>
               </div>
-              <li className="text-primary">Integral with a Singularity. Has a singularity at 𝑥 = 0 . As 𝑥 approaches 0 from the right, the function approaches infinity. </li>
-              <div className="flex flex-row items-center justify-center">
+              <li className="">Integral with a Singularity. Has a singularity at 𝑥 = 0 . As 𝑥 approaches 0 from the right, the function approaches infinity. </li>
+              <div className="flex flex-row items-center justify-center text-primary">
                 <MathJax  inline>{"$int_{0}^{1} frac{1}{sqrt{x}} , dx$"}</MathJax>
               </div>
             </ul>
             <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Conclusion.</div>
             <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">Simpson&apos;s Rule is a numerical integration method used to approximate the definite integral of a function. What makes it unique compared to other numerical integration techniques like the trapezoidal rule is its use of quadratic approximations. Instead of approximating the function with straight lines (as in the trapezoidal rule), Simpson&apos;s Rule uses quadratic polynomials to approximate the curve of the function between each pair of points.</div>
-            <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">This quadratic approximation allows Simpson&apos;s Rule to provide a more accurate estimation of the integral, especially for functions that are well-behaved and smooth. It typically converges to the exact value of the integral faster than the trapezoidal rule for functions that are sufficiently smooth.</div>
+            <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">This quadratic approximation allows Simpson&apos;s Rule to provide a more accurate estimation of the integral, especially for functions that are well-behaved and smooth.</div>
             <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">Another unique aspect of Simpson&apos;s Rule is its simplicity in implementation. It involves dividing the interval of integration into subintervals and applying a formula that combines the function values at the endpoints and midpoint of each subinterval to compute the approximation. This simplicity makes it a popular choice for numerical integration in various fields, including mathematics, physics, engineering, and computer science.</div>
             <div className="container my-6 w-5/6 text-4xl font-bold font-serif text-primary ">Learning Outcomes.</div>
             <div className="container my-6 mx-auto w-5/6 text-justify font-serif text-2xl">We created this website in order to fully understand Simpson&apos;s Rule and to create a calculator that shows the process of the this numerical integration.</div>

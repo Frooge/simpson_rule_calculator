@@ -122,7 +122,7 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
         )
       }
       {
-        subintervalsValue !== 0 && (
+        subintervalsValue !== 0 && !isNaN(subintervalsValue) && (
             <span> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></span>
         )
       }
