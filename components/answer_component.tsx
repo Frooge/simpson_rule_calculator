@@ -104,7 +104,7 @@ export default function AnswerComponent(
                     Divide the interval <MathJax inline>{`$[${minValue}, ${maxValue}]$`}</MathJax> into <MathJax inline>{`$n = ${subintervalsValue}$`} </MathJax>
                     subintervals of the length <MathJax inline>{`$Delta x = ${maxValue-minValue}/${subintervalsValue}$`}</MathJax>
                     with the following endpoints:   
-                    <div className='flex flex-wrap overflow-auto'>
+                    <div className='flex flex-wrap overflow-auto h-14'>
                         <MathJax inline>{`$a = ${minValue}, ${getIntervals().join(', ')},${maxValue} = b$`}</MathJax> 
                     </div>
                 </div>
@@ -117,10 +117,10 @@ export default function AnswerComponent(
                     ))}
                 </div>
 
-                <div>
+                <div className='mt-6'>
                     Finally, just sum up the above values and multiply by <MathJax inline>{`$(Delta x) / 3 = ${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
-                <div className='overflow-auto'>
+                <div className='overflow-auto h-16 my-6'>
                     <MathJax inline>{`$=(${allCalculations().join('+')})*${new Fraction(maxValue-minValue, subintervalsValue).mul(new Fraction(1,3)).toString()}$`}</MathJax>
                 </div>
                 
