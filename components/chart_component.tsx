@@ -85,7 +85,6 @@ const getPoints = (): number[] => {
       }
       let result = parse(functionValue).evaluate({x:num})
       arrayPoints.push(result);
-      console.log(result);
     }
     return arrayPoints;
   }
@@ -97,10 +96,16 @@ const options = {
       ticks: {
         color: 'white', // Set color of y-axis labels to white
       },
+      grid: {
+        color: (context:any) => context.tick.value === 0 ? 'red' : 'rgba(0, 0, 0, 0.1)',
+      },
     },
     x: {
       ticks: {
         color: 'white', // Set color of x-axis labels to white
+      },
+      grid: {
+        color: (context:any) => context.tick.value === 0 ? 'red' : 'rgba(0, 0, 0, 0.1)',
       },
     },
   },

@@ -71,6 +71,18 @@ export default function AnswerComponent(
         return replacedFunc;
     }
 
+    const fixNotation = (arr: string[]): string[] => {
+        const newArr: string[] = [];
+        for(let i = 0; i < arr.length; i++){
+            let num = arr[0].toString()
+            if(num.includes('e')){
+                num = num.replace('e',  'times10^')
+            }   
+            newArr[i] = num
+        }
+        return newArr;
+    }
+
     const allCalculations = (): string[] => {
         const a = minValue;
         const b = maxValue;
@@ -87,7 +99,9 @@ export default function AnswerComponent(
             }),
             ...[solveFunction(b)]
         ]
-        return calculations;
+
+        // return calculations;
+        return fixNotation(calculations);
     }
 
   return (
