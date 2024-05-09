@@ -53,6 +53,7 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
         
       }else if(epsilon){
         setShowErrorBound(true);
+        setShowAnswer(true);
       }
       setError('');
     }else{
@@ -112,9 +113,8 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
     </div>
     <div className="flex flex-col space-y-6 basis-full min-w-[900px] border-white border p-4"> 
       {showAnswer &&
-        <div>
-          <MathJax className='self-center'>
-            <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} dx$`}</MathJax> 
+      <div>
+        <div className='text-2xl text-primary self-center'><span className='font-normal'>Simpson&apos;s Rule: </span>Approximate the integral <MathJax inline>{ `$int_${minValue}^${maxValue} ${functionValue} dx$`}</MathJax> 
             {
               epsilon && showErrorBound && (
                 <span>
@@ -128,10 +128,15 @@ export default function FormComponent({func,mn,mx,n,eps} : ExampleProps) {
                   <span> with <MathJax inline>{ `$n = ${subintervalsValue}$` }</MathJax></span>
               )
             }
-            </div>
-          </MathJax>
-          <AnswerComponent answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
-          <ChartComponent minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
+          </div>
+          {
+            !epsilon && 
+            <>
+            <AnswerComponent answerValue={answerValue} minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
+            <ChartComponent minValue={minValue} maxValue={maxValue} functionValue={functionValue} subintervalsValue={subintervalsValue}/>
+            </>
+          }
+          
       </div>
       }
     </div>
