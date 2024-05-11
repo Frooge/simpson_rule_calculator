@@ -7,7 +7,7 @@ import CustomNavbar from "@/components/custom_navbar";
 const pd = Playfair_Display({ weight: ["400","500","600"], subsets:['latin']});
 
 export const metadata: Metadata = {
-  title: "Simpson's Calculator",
+  title: "Simpson's Rule Calculator",
   description: "Discover Numerical Integration using the Simpson's Rule",
 };
 
